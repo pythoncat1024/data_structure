@@ -7,7 +7,7 @@
 int main(void) {
     using namespace std;
     cout << "Hello World !\n";
-    List<int> ll;
-    cout << ll.last << endl;
+    const List<double> list = MakeEmpty<double>();
+
     return 0;
 }
