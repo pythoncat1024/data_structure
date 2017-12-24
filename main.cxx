@@ -7,7 +7,7 @@
 int main(void) {
     using namespace std;
     cout << "Hello World !\n";
-    LinearList ll;
-    cout << ll.age << endl;
+    List<int> ll;
+    cout << ll.last << endl;
     return 0;
 }
