@@ -3,5 +3,5 @@ project(data_struture)
 
 set(CMAKE_CXX_STANDARD 11)
 
-set(SOURCE_FILES main.cxx)
+set(SOURCE_FILES main.cxx LinearList.cxx LinearList.h)
 add_executable(data_struture ${SOURCE_FILES})
