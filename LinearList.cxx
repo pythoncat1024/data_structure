@@ -2,12 +2,14 @@
 // Created by cat on 2017/12/24.
 //
 
+#include <iostream>
 #include "LinearList.h"
 
-template<typename ElementType>
-List<ElementType> *MakeEmpty() {
+List *MakeEmpty() {
 
-    List<ElementType> *list = new List<ElementType>;
+
+    List *list = new List;
+    std::cout << "x--> " << list->MAXSIZE << "\n";
     list->last = -1; // 初始化的时候，没有任何的数据
     list->data = new ElementType[list->MAXSIZE];
 //    int a[9]=new int[9];
@@ -21,38 +23,36 @@ List<ElementType> *MakeEmpty() {
  * @param L
  * @return
  */
-template<typename ElementType>
-ElementType FindKth(int K, List<ElementType> L) {
-    if (L.last == -1) {
+ElementType FindKth(int K, List *L) {
+    if (L->last == -1) {
         // is empty
-        return nullptr;
+        return ERROR;
     }
     ElementType ele;
-    int size = L.last + 1;
+    int size = L->last + 1;
     int i;
     for (i = 0; i < size; ++i) {
         if (K == i) break;
     }
 
     if (i < size) {
-        return L.data[K];
+        return L->data[K];
     } else {
-        return nullptr;
+        return ERROR;
     }
 
 
 }
 
-template<typename ElementType>
-int Find(ElementType X, List<ElementType> L) {
-    if (L.last == -1) {
+int Find(ElementType X, List *L) {
+    if (L->last == -1) {
         // is empty
         return -1;
     }
-    int size = L.last + 1;
+    int size = L->last + 1;
     int i;
     for (i = 0; i < size; ++i) {
-        if (X == L.data[i]) break;
+        if (X == L->data[i]) break;
     }
     if (i < size) {
         return i;
@@ -68,31 +68,47 @@ int Find(ElementType X, List<ElementType> L) {
  * @param i
  * @param L
  */
-template<typename ElementType>
-void Insert(ElementType X, int i, List<ElementType> L) {
-    if (L.last >= L.MAXSIZE) {
-        // is full
-        return;
+void Insert(ElementType X, int i, List *L) {
+
+    std::cout << "a:" << L->last << " , b= " << L->MAXSIZE << "\n";
+//    if (L->last >= L->MAXSIZE) {
+//        // is full
+//        return;
+//    }
+    if (L->last > -1) {
+        for (int j = L->last + 1; j > i; --j) {
+            L->data[j] = L->data[j - 1];
+        }
     }
-    for (int j = L.last + 1; j > i; ++j) {
-        L.data[j] = L.data[j - 1];
-    }
-    L.data[i] = X;
+    L->data[i] = X;
+    L->last++;
 }
 
-template<typename ElementType>
-void Delete(int i, List<ElementType> L) {
-    if (i > L.last || i < 0) {
+void Delete(int i, List *L) {
+    if (i > L->last || i < 0) {
         // illegal position
         return;
     } else {
-        for (int j = i; j < L.last + 1; ++j) {
-            L.data[j - 1] = L.data[j];
+        for (int j = i; j < L->last + 1; ++j) {
+            L->data[j - 1] = L->data[j];
         }
+        L->last--;
     }
 }
 
-template<typename ElementType>
-int Length(List<ElementType> L) {
-    return L.last + 1;
+int Length(List *L) {
+    return L->last + 1;
+}
+
+void Show(List *data) {
+
+    std::cout << "List:" << data->last << " , [";
+
+    for (int i = 0; i < Length(data) - 1; ++i) {
+        std::cout << data->data[i] << " , ";
+        if (i != 0 && i % 5 == 0) {
+            std::cout << "\n";
+        }
+    }
+    std::cout << data->data[Length(data) - 1] << " ]\n";
 }

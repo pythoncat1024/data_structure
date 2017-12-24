@@ -16,31 +16,27 @@
 #ifndef DATA_STRUTURE_LINEARLIST_H
 #define DATA_STRUTURE_LINEARLIST_H
 
-
-template<typename ElementType>
+//template<typename ElementType>
+typedef double ElementType;
+static ElementType ERROR = -9931.0; // # this can redefine !
 struct List {
     static const unsigned long MAXSIZE = 20; // # this can redefine !
     int last;
-    ElementType data[MAXSIZE];
+    ElementType *data;
 };
 
-template<typename ElementType>
-List<ElementType> *MakeEmpty();
+List *MakeEmpty();
 
-template<typename ElementType>
-ElementType FindKth(int K, List<ElementType> *L);
+ElementType FindKth(int K, List *L);
 
-template<typename ElementType>
-int Find(ElementType *X, List<ElementType> *L);
+int Find(ElementType X, List *L);
 
-template<typename ElementType>
-void Insert(ElementType *X, int i, List<ElementType> *L);
+void Insert(ElementType X, int i, List *L);
 
-template<typename ElementType>
-void Delete(int i, List<ElementType> *L);
+void Delete(int i, List *L);
 
-template<typename ElementType>
-int Length(List<ElementType> *L);
+int Length(List *L);
 
+void Show(List *data);
 
 #endif //DATA_STRUTURE_LINEARLIST_H
